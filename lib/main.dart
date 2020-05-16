@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './Question.dart';       //import all from question dart file
 
 void main() {
   runApp(MyApp()); //It runs our app when it is booted up
@@ -8,16 +9,16 @@ class MyApp extends StatefulWidget {   //defines UI of the app which is stateful
   @override
   State<StatefulWidget> createState() {   //stateful widget store their mutable state in seperate object created by createState
     // TODO: implement createState
-   return MyAppState();               //both classes are connected
+   return _MyAppState();               //both classes are connected
   }
 }
 
-class MyAppState extends State<MyApp> {  //state class contains widget's mutable state
+class _MyAppState extends State<MyApp> {  //state class contains widget's mutable state
 
-  var questionIndex =0;
-  void answerQuestion(){
+  var _questionIndex =0;
+  void _answerQuestion(){
     setState(() {           //re run the build method hence updates are reflected on screen
-      questionIndex = questionIndex +1;
+      _questionIndex = _questionIndex + 1;
 
     });
 //    print(questionIndex);
@@ -37,18 +38,20 @@ class MyAppState extends State<MyApp> {  //state class contains widget's mutable
         title: Center(child: Text('QUIZ TIMEE!!')),
       ),
       body: Column(children: [
-        Center(child: Te xt(questions[questionIndex])),
+        Center(child: Question(        //Question class constructor call to change input data
+            questions[_questionIndex],
+        )),
         RaisedButton(
           child: Text('ANSWER 1'),    //text in the widget will follow child argument
-          onPressed: answerQuestion,  //we'll pass pointer to function since we dont want to execute function everytime it is encountered
+          onPressed: _answerQuestion,  //we'll pass pointer to function since we dont want to execute function everytime it is encountered
         ),
         RaisedButton(
           child: Text('ANSWER 2'),
-          onPressed: answerQuestion,
+          onPressed: _answerQuestion,
         ),
         RaisedButton(
           child: Text('ANSWER 3'),
-          onPressed: answerQuestion,
+          onPressed: _answerQuestion,
         ),
       ]),
     ));

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './Question.dart';       //import all from question dart file
+import './Answer.dart';
 
 void main() {
   runApp(MyApp()); //It runs our app when it is booted up
@@ -26,10 +27,20 @@ class _MyAppState extends State<MyApp> {  //state class contains widget's mutabl
   @override
   Widget build(BuildContext context) {
     //build is called by flutter when we try to draw something on screen
-    var questions= [       //list of string (questions)
-      'WHAT\'S YOUR FAVOURITE COLOR?',
-      'WHAT\'S YOUR FAVOURITE ANIMAL?',
-      'WHAT\'S YOUR FAVOURITE PLACE',
+    var questions= [           //Map of String and list
+      {
+        'questionText':'WHAT\'S YOUR FAVOURITE COLOR?',
+        'answers':['Pink','Red','Blue'],
+      },
+      {
+        'questionText':'WHAT\'S YOUR FAVOURITE ANIMAL?',
+        'answers':['Dog','Rabbit','Tiger'],
+      },
+      {
+        'questionText':'WHAT\'S YOUR FAVOURITE PLACE',
+        'answers':['Paris','London','Dubai'],
+      },
+
     ];
     return MaterialApp(
         home: Scaffold(
@@ -39,21 +50,15 @@ class _MyAppState extends State<MyApp> {  //state class contains widget's mutabl
       ),
       body: Column(children: [
         Center(child: Question(        //Question class constructor call to change input data
-            questions[_questionIndex],
+            questions[_questionIndex]['questionText'],
         )),
-        RaisedButton(
-          child: Text('ANSWER 1'),    //text in the widget will follow child argument
-          onPressed: _answerQuestion,  //we'll pass pointer to function since we dont want to execute function everytime it is encountered
-        ),
-        RaisedButton(
-          child: Text('ANSWER 2'),
-          onPressed: _answerQuestion,
-        ),
-        RaisedButton(
-          child: Text('ANSWER 3'),
-          onPressed: _answerQuestion,
-        ),
-      ]),
-    ));
+        ...(questions[_questionIndex]['answers']as List<String>).map((answer){   //map the list into list of widgets
+          return Answer(_answerQuestion,answer);    //functn in map is executed for every element in answer list
+        }).toList(),
+
+      ],
+    ),
+    ),
+    );
   }
 }

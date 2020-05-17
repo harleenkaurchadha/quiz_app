@@ -17,11 +17,13 @@ class MyApp extends StatefulWidget {   //defines UI of the app which is stateful
 
 class _MyAppState extends State<MyApp> {  //state class contains widget's mutable state
 
+  var _totalScore=0;
   var _questionIndex =0;
-  void _answerQuestion(){
+
+  void _answerQuestion(int score){
     setState(() {           //re run the build method hence updates are reflected on screen
       _questionIndex = _questionIndex + 1;
-
+      _totalScore += score;
     });
 //    print(questionIndex);
   }
@@ -31,15 +33,15 @@ class _MyAppState extends State<MyApp> {  //state class contains widget's mutabl
     const _questions= [           //Map of String and list
       {
         'questionText':'WHAT\'S YOUR FAVOURITE COLOR?',
-        'answers':['Pink','Red','Blue'],
+        'answers':[{'text':'Pink','score':6},{'text':'Red','score':8},{'text':'Blue','score':3}],
       },
       {
         'questionText':'WHAT\'S YOUR FAVOURITE ANIMAL?',
-        'answers':['Dog','Rabbit','Tiger'],
+        'answers':[{'text':'Dog','score':6},{'text':'Rabbit','score':3},{'text':'Tiger','score':8}],
       },
       {
         'questionText':'WHAT\'S YOUR FAVOURITE PLACE',
-        'answers':['Paris','London','Dubai'],
+        'answers':[{'text':'Paris','score':2},{'text':'London','score':5},{'text':'Dubai','score':8}],
       },
 
     ];
@@ -51,7 +53,7 @@ class _MyAppState extends State<MyApp> {  //state class contains widget's mutabl
       ),
       body: _questionIndex < _questions.length ?
           Quiz(answerQuestion: _answerQuestion,questions: _questions,questionIndex:_questionIndex) :      //named arguments
-          Result(),
+          Result(_totalScore),
     ),
 
         );

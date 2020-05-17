@@ -19,9 +19,9 @@ class Quiz extends StatelessWidget{
     Center(child: Question(        //Question class constructor call to change input data
     questions[questionIndex]['questionText'],
     )),
-    ...(questions[questionIndex]['answers']as List<String>).map((answer){   //map the list into list of widgets
-    return Answer(answerQuestion,answer);    //functn in map is executed for every element in answer list
-    }).toList(),
+    ...(questions[questionIndex]['answers']as List<Map<String,Object>>).map((answer){   //map the list into list of widgets
+    return Answer(()=> answerQuestion(answer['score']),answer['text']);    //functn in map is executed for every element in answer list
+    }).toList(),                                                        //answer is the mapped version of _questions['answers']
 
     ],
     );

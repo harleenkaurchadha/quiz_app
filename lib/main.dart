@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import './Question.dart';       //import all from question dart file
-import './Answer.dart';
+import './Quiz.dart';
+import './Result.dart';       //import all from question dart file
+
 
 void main() {
   runApp(MyApp()); //It runs our app when it is booted up
@@ -27,7 +28,7 @@ class _MyAppState extends State<MyApp> {  //state class contains widget's mutabl
   @override
   Widget build(BuildContext context) {
     //build is called by flutter when we try to draw something on screen
-    var questions= [           //Map of String and list
+    const _questions= [           //Map of String and list
       {
         'questionText':'WHAT\'S YOUR FAVOURITE COLOR?',
         'answers':['Pink','Red','Blue'],
@@ -48,17 +49,11 @@ class _MyAppState extends State<MyApp> {  //state class contains widget's mutabl
       appBar: AppBar(
         title: Center(child: Text('QUIZ TIMEE!!')),
       ),
-      body: Column(children: [
-        Center(child: Question(        //Question class constructor call to change input data
-            questions[_questionIndex]['questionText'],
-        )),
-        ...(questions[_questionIndex]['answers']as List<String>).map((answer){   //map the list into list of widgets
-          return Answer(_answerQuestion,answer);    //functn in map is executed for every element in answer list
-        }).toList(),
+      body: _questionIndex < _questions.length ?
+          Quiz(answerQuestion: _answerQuestion,questions: _questions,questionIndex:_questionIndex) :      //named arguments
+          Result(),
+    ),
 
-      ],
-    ),
-    ),
-    );
+        );
   }
 }

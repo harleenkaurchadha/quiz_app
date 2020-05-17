@@ -27,6 +27,13 @@ class _MyAppState extends State<MyApp> {  //state class contains widget's mutabl
     });
 //    print(questionIndex);
   }
+  void _resetQuiz(){
+    setState(() {
+      _questionIndex=0;
+      _totalScore=0;
+    });
+
+  }
   @override
   Widget build(BuildContext context) {
     //build is called by flutter when we try to draw something on screen
@@ -53,7 +60,7 @@ class _MyAppState extends State<MyApp> {  //state class contains widget's mutabl
       ),
       body: _questionIndex < _questions.length ?
           Quiz(answerQuestion: _answerQuestion,questions: _questions,questionIndex:_questionIndex) :      //named arguments
-          Result(_totalScore),
+          Result(_totalScore,_resetQuiz),
     ),
 
         );

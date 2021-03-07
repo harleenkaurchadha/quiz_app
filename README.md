@@ -7,6 +7,6 @@ In this app we are going to create a quiz app. This quiz contains a list of ques
 ## How to use
 
 Download or clone this repo by using the following link:
-[git@github.com:harleenkaurchadha/quiz_app.git] (git@github.com:harleenkaurchadha/quiz_app.git) 
+[git@github.com:harleenkaurchadha/quiz_app.git](git@github.com:harleenkaurchadha/quiz_app.git) 
 
 
